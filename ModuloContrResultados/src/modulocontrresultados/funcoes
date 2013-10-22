@@ -9,6 +9,13 @@
 * LerBDEquipamento() -> carregar os dados para a combobox opçao quando é escolhido o equipamento
 * LerBDInsectadores() -> carregar os dados para a combobox opçao quando é escolhido insectadores
 * LerBDFuncionario() -> ler os funcionarios para a COMBOBOX Funcionarios
+* LerBDConsultarMedidasCorrectivas() -> funcao para ler para a combox, (funcionario responsavel)
+
+******************* GRAVAR BD ***************
+
+GravarNaoConformidade() -> função para gravar dados na Base de dados ( CODIGO SQL)
+GravarMedidaCorrectivas() -> função para gravar dados na Base de dados ( CODIGO SQL)
+
 
 
 ******************* INSERIR BD ***************
