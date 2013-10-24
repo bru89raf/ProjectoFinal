@@ -32,9 +32,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     String NomeTabelaContrResultado;
     
     String comboTipoOP = ""; // guardar a opçao da ComboBox TIPO
+    String comboSeccaoOP = ""; // guardar a opção da  comboBoc Opção (Controlo resultados)
     
     /* VARIAVEIS PARA O IDCONTROLORESULTADO, PARA INSERIR OS DADOS NA TABELA DAS NAO CONFORMIDADES */
     int idControloResultadosID = 0;
+    
+    
+    /*  VARIAVEIS PARA ADICIONAR UMA NOVA NAO CONFORMIDADE A UM CONTROLO DE RESULTADOS  */
+    int addNewNaoConformidadeIdFuncionario = 0;
+    int addNewNaoConformidadeIDContrResultado = 0;
+    
     
     
     
@@ -112,6 +119,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jButtonFecharConsultaControlosResultados = new javax.swing.JButton();
         jButtonCriaNovoControloResultados = new javax.swing.JButton();
         jButtonVerNaoConformidade = new javax.swing.JButton();
+        jComboBoxSeccao = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
         jDialogConsultaNaoConformidades = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
         jLabelNaoConformidades = new javax.swing.JLabel();
@@ -134,7 +143,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jDialogNovoControloResultados.setTitle("Controlo de Resultados");
+        jDialogNovoControloResultados.setTitle("NOVO CONTROLO DE RESULTADOS");
         jDialogNovoControloResultados.setMinimumSize(new java.awt.Dimension(548, 740));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Controlo de Resultados"));
@@ -320,7 +329,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jDialogNaoConformidades.setTitle("Conformidades");
+        jDialogNaoConformidades.setTitle("NOVA NÃO CONFORMIDADE");
         jDialogNaoConformidades.setMinimumSize(new java.awt.Dimension(435, 670));
 
         jPanel3.setMinimumSize(new java.awt.Dimension(200, 150));
@@ -348,6 +357,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
 
         jButtonCancelarNaoConformidade.setText("Cancelar");
+        jButtonCancelarNaoConformidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarNaoConformidadeActionPerformed(evt);
+            }
+        });
 
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
 
@@ -444,7 +458,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jDialogMedidasCorrectiva.setTitle("Medidas Correctivas");
+        jDialogMedidasCorrectiva.setTitle("NOVA MEDIDA CORRECTIVA");
         jDialogMedidasCorrectiva.setMinimumSize(new java.awt.Dimension(500, 600));
 
         jLabelMedidasCorrectivas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -477,6 +491,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
 
         jButtonCancelarMedidaCorrectiva.setText("Cancelar");
+        jButtonCancelarMedidaCorrectiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarMedidaCorrectivaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelMedidasCorrectivasLayout = new javax.swing.GroupLayout(jPanelMedidasCorrectivas);
         jPanelMedidasCorrectivas.setLayout(jPanelMedidasCorrectivasLayout);
@@ -555,7 +574,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jDialogConsultarControlos.setTitle("Consultar Controlos de Resultados");
+        jDialogConsultarControlos.setTitle("CONSULTAR CONTROLOS DE RESULTADOS");
         jDialogConsultarControlos.setMinimumSize(new java.awt.Dimension(1040, 492));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -566,7 +585,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Funcionario", "IdAnalise", "IDEquipamento", "IDInsectado.", "Data", "Resultado", "Ficha Tecnica", "Descrição", "Outros"
+                "Funcionario", "Analise", "Equipamento", "Insectador", "Data", "Resultado", "Ficha Tecnica", "Descrição", "Outro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -584,7 +603,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
         jScrollPaneConsultarControlos.setViewportView(jTableConsultarControlos);
 
-        jButtonFecharConsultaControlosResultados.setText("Fechar");
+        jButtonFecharConsultaControlosResultados.setText("Cancelar");
         jButtonFecharConsultaControlosResultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFecharConsultaControlosResultadosActionPerformed(evt);
@@ -605,6 +624,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxSeccao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Sessão--", "Analises", "Equipamentos", "Insectadores", "Outros", " " }));
+        jComboBoxSeccao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSeccaoActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Secção");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -614,13 +642,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneConsultarControlos)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonVerNaoConformidade)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jButtonCriaNovoControloResultados)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonFecharConsultaControlosResultados)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButtonCriaNovoControloResultados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonFecharConsultaControlosResultados)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxSeccao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonVerNaoConformidade)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(415, Short.MAX_VALUE)
@@ -633,7 +664,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonVerNaoConformidade)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonVerNaoConformidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxSeccao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneConsultarControlos, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -660,6 +695,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jDialogConsultaNaoConformidades.setTitle("CONSULTAR NÃO CONFORMIDADES");
         jDialogConsultaNaoConformidades.setMinimumSize(new java.awt.Dimension(840, 375));
 
         jLabelNaoConformidades.setText("CONSULTA NAO CONFORMIDADES");
@@ -669,11 +705,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cont Resulta", "Funcionario", "Data(Ñ Confor)", "Ocorrencia", "Medida Correct."
+                "Cont Resulta", "Funcionario", "Data(Ñ Confor)", "Ocorrencia", "Medida Correct.", "Func. Responsav."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -690,6 +726,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         });
 
         jButtonAddNovaNaoConformidade.setText("Nova Não Conformidade");
+        jButtonAddNovaNaoConformidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddNovaNaoConformidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -743,6 +784,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jDialogConsultarMedidasCorrectivas.setTitle("CONSULTAR MEDIDAS CORRECCTIVAS");
         jDialogConsultarMedidasCorrectivas.setMinimumSize(new java.awt.Dimension(740, 380));
 
         jLabelConsultaMedidasCorrectivas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -950,7 +992,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jButtonGravarNaoConformidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarNaoConformidadeActionPerformed
         // BOTAO GUARDAR E ABRIR JANELA DE MEDIDAS CORRECTIVAS
         //jDialogMedidasCorrectiva.setVisible(true);
-       GravarNaoConformidade(); 
+       //GravarNaoConformidade(); 
        
        
        int resultNaoConformidade = JOptionPane.showConfirmDialog(jDialogNaoConformidades, "Deseja Abrir a Janela de Medidas Correctivas?", null, JOptionPane.YES_NO_OPTION);
@@ -1032,6 +1074,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         LerBDNaoConformidades();
         jDialogConsultaNaoConformidades.setLocationRelativeTo(this);
         jDialogConsultaNaoConformidades.setVisible(true);
+        //ESCONDER BOTAO ADICIONAR NOVO
+        jButtonAddNovaNaoConformidade.setVisible(false);
+        
+        
     }//GEN-LAST:event_jButtonNaoConformidadesActionPerformed
 
     private void jButtonCriaNovoControloResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriaNovoControloResultadosActionPerformed
@@ -1046,30 +1092,41 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jButtonVerNaoConformidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerNaoConformidadeActionPerformed
         // BOTAO PARA ABRIR O SELECCIONADA DA TABELA ( NAO CONFORMIDADES)
         int linha = jTableConsultarControlos.getSelectedRow();
-        //DEVOLVE O NOME DO FUNCIONARIO
-        String nomeFunc = (String) jTableConsultarControlos.getValueAt(linha, 0);
-        //System.out.println("Nome: " + nomeFunc);
-
-        int idFuncionario = 0;
-
+        
 
         if (linha == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione a Linha do Controlo de Resulto ");
         } else {
-            jDialogNovoControloResultados.setVisible(false);
-            jDialogConsultaNaoConformidades.setVisible(true);
-            jDialogConsultaNaoConformidades.setLocationRelativeTo(this);
-//            LerBDConsultaNaoConformidades();
 
-            //DEVOLVE O ID DO FUNCIONARIO
-            idFuncionario = selectId("FUNCIONARIO", "Nome", nomeFunc, "IDFUNCIONARIO");
-             System.out.println("IDFUNCIONARIO TABELA -> " + idFuncionario);
+            //DEVOLVE O NOME DO FUNCIONARIO
+            String nomeFunc = (String) jTableConsultarControlos.getValueAt(linha, 0);
+            //System.out.println("Nome: " + nomeFunc);
 
-            //DEVOLVE O IDCONTRESULTADO ONDE O FUNCIONARIO É = AO QUE VEM DE CIMA
-            LimpaTabelaConsultaNaoConformidades();
-            ConsultaBDNaoConformidadeSelect(idFuncionario);
-
+            String resultado = (String) jTableConsultarControlos.getValueAt(linha, 5);
+           
+            int idFuncionario = 0;
             
+            
+            //VERIFICAR SE A LINHA QUE ESTAMOS A SELECCINAR, O RESILTADO É
+            // C OU NC
+            if (resultado.equals("NC")) {
+
+                jDialogNovoControloResultados.setVisible(false);
+                jDialogConsultaNaoConformidades.setVisible(true);
+                jDialogConsultaNaoConformidades.setLocationRelativeTo(this);
+
+                //DEVOLVE O ID DO FUNCIONARIO
+                idFuncionario = selectId("FUNCIONARIO", "Nome", nomeFunc, "IDFUNCIONARIO");
+                //System.out.println("IDFUNCIONARIO TABELA -> " + idFuncionario);
+               
+
+                //DEVOLVE O IDCONTRESULTADO ONDE O FUNCIONARIO É = AO QUE VEM DE CIMA
+                LimpaTabelaConsultaNaoConformidades();
+                ConsultaBDNaoConformidadeSelect(idFuncionario);
+            } else {
+                JOptionPane.showMessageDialog(null, "Linha Selecciona não contem Nehuma Não Conformidade ! ");
+            }
+
         }
     }//GEN-LAST:event_jButtonVerNaoConformidadeActionPerformed
 
@@ -1078,7 +1135,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxOpcaoActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
+        //BOTAO FECHAR A JANELA CONTROLO DE RESULTADOS
+        jDialogNovoControloResultados.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jComboBoxCorrectivaMedidaCorrectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCorrectivaMedidaCorrectivaActionPerformed
@@ -1126,7 +1184,67 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         jDialogMedidasCorrectiva.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBoxSeccaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSeccaoActionPerformed
+        //QUAL A SESSAO QUE VAMOS CARREGAAR PARA  A TABELA
+//        String comboPesquisa = jComboBoxSeccao.getSelectedItem().toString();
+//        
+//        if (comboPesquisa.equals("Analises")){
+//            comboSeccaoOP = "Analises";
+//            
+//        }else if (comboPesquisa.equals("Equipamentos")){
+//          comboSeccaoOP = "Equipamentos";
+//            
+//        }else if (comboPesquisa.equals("Insectadores")){
+//           comboSeccaoOP = "Insectadores";
+//            
+//            
+//        }else if (comboPesquisa.equals("Outros")){
+//            comboSeccaoOP = "Outros";
+//        }
+//        
+//        LimpaTabelaConsultarControlos();
+//        LerBDControloResultados();
+
+        
+    }//GEN-LAST:event_jComboBoxSeccaoActionPerformed
+
+    private void jButtonAddNovaNaoConformidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNovaNaoConformidadeActionPerformed
+        // ADICIONAR NOVA NAO CONFORMIDADE AKELE CONTROLO RESULTADOS
+            
+        jDialogNaoConformidades.setVisible(true);
+        
+        //PARA ADICIONAR UMA NOVA NAO CONFORMIDADE NECESSITAMOS DE PASSAR OS CAMPOS "IDCONTRESULT" e "IDFUNCIONARIO"
+        
+        int funcionario = addNewNaoConformidadeIdFuncionario ;
+        int controResult = idControloResultadosID;
+        
+        
+        
+        //ESCREVER
+        System.out.println("CONTROLO RESULTADOS");
+        System.out.println("FUNCIONARIO: " + funcionario);
+        System.out.println("CONTRO RESULT: " + controResult);
+        System.out.println("\n\n");
+        
+   
+        
+    }//GEN-LAST:event_jButtonAddNovaNaoConformidadeActionPerformed
+
+    private void jButtonCancelarNaoConformidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarNaoConformidadeActionPerformed
+        // BOTAO FECHAR JANELA NAO CONFORMIDADES
+        jDialogNaoConformidades.setVisible(false);
+        LimpaNaoConformidade();
+    }//GEN-LAST:event_jButtonCancelarNaoConformidadeActionPerformed
+
+    private void jButtonCancelarMedidaCorrectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarMedidaCorrectivaActionPerformed
+        //BOTAO FEXHAR JANELA MEDIDAS CORRECTIVAS
+        jDialogMedidasCorrectiva.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarMedidaCorrectivaActionPerformed
  
+     
+    
+    
     /* LER */ 
        
     private void LerBDControloResultados(){
@@ -1193,6 +1311,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         String dataNaoConform = "";
         String ocorrencia = "";
         String medidaCorrecti = "";
+        int idFuncionarioResponsavelMedidaCorrectiva = 0;
+        String NomeIdFuncionarioResponsavelMedidaCorrectiva = "";
         
         model = (DefaultTableModel) jTableNaoConformidades.getModel();
          
@@ -1208,7 +1328,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                      
             con = DriverManager.getConnection(url);
             String nomeTabela = "NAOCONFORMIDADES";
-            String sql = "select * from "+nomeTabela+" where ";
+            String sql = "select * from "+nomeTabela ;
             PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
            
@@ -1219,9 +1339,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 dataNaoConform = rs.getString("DATANAOCONFORMIDADE");
                 ocorrencia = rs.getString("OCORRENCIA");
                 medidaCorrecti = rs.getString("MEDIDACORRECTIVA");
-              
+                idFuncionarioResponsavelMedidaCorrectiva = rs.getInt("IDFUNCIONARIOMEDIDACORRECTIVA");
+                NomeIdFuncionarioResponsavelMedidaCorrectiva = selectString("FUNCIONARIO","IDFUNCIONARIO",idFuncionarioResponsavelMedidaCorrectiva,"NOME"); 
                 
-                model.addRow(new Object[]{idNaoConf, idContResultados, idFuncionario, dataNaoConform, ocorrencia, medidaCorrecti});
+                model.addRow(new Object[]{idNaoConf, idContResultados, idFuncionario, dataNaoConform, ocorrencia, medidaCorrecti, NomeIdFuncionarioResponsavelMedidaCorrectiva});
                                 
             }
             
@@ -1403,10 +1524,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     
     /* CONSULTAS */    
     
-    //VERIFICAR O ID DO CONTROLO ATRAVES DO ID DO FUNCINARIO
-        
-    
-
     //PREENCHER TABELAS COM DADOS SELECCIONADOS
     private void ConsultaBDNaoConformidadeSelect(int idFuncionarioSelecc ){
         int funcionario = idFuncionarioSelecc;
@@ -1417,10 +1534,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         String ocorrencia = "";
         String medidaCorrecti = "";
         String resultado = "NC";
+        String nomefuncionario = "";
         
          model = (DefaultTableModel) jTableNaoConformidades.getModel();
-        
-        
+                
         //Ligação BD
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");  
@@ -1433,51 +1550,47 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         try{         
             con = DriverManager.getConnection(url);
             String nomeTabela = "CONTROLORESULTADOS";
-           // String sql = "select * from "+nomeTabela+" where IDFUNCIONARIO="+funcionario +"and RESULTADO="+"'"+ resultado +"'";
-            String sql = "select * from "+nomeTabela+" where IDFUNCIONARIO="+funcionario;
+            String sql = "select * from "+nomeTabela+" where IDFUNCIONARIO="+funcionario +"and RESULTADO="+"'"+ resultado +"'";
+            //String sql = "select * from "+nomeTabela+" where IDFUNCIONARIO="+funcionario;
             PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
                    
             while(rs.next()){
                 idControloResultadosID = rs.getInt("IDCONTRESULTADOS");
-                System.out.println("IDCONTROLORESULTADO Pesquisar -> " + idControloResultadosID);          
-                
+                System.out.println("IDCONTROLORESULTADO Pesquisar -> " + idControloResultadosID); 
+                 //VARIVAEL GLOBAL
+                addNewNaoConformidadeIdFuncionario = idFuncionario;              
+                addNewNaoConformidadeIdFuncionario = funcionario;
                 //ESCREVER NA TABELA A PESQUISA
-                //Connection con2 = DriverManager.getConnection(url);
                 String nomeTabela2 = "NAOCONFORMIDADES";
-                String sql2 = "select * from "+nomeTabela2+" where IDNAOCONF="+idControloResultadosID;
+                String sql2 = "select * from "+nomeTabela2+" where IDCONTRESULTADOS="+idControloResultadosID;
                 PreparedStatement st2 = (PreparedStatement) con.prepareStatement(sql2);
                 ResultSet rs2 = st2.executeQuery();
                 
                 while(rs2.next()){
                     apagar = rs2.getInt("IDCONTRESULTADOS");
                     idFuncionario = rs2.getInt("IDFUNCIONARIO");
+                    nomefuncionario = selectString("FUNCIONARIO","IDFUNCIONARIO",idFuncionario,"NOME"); 
                     dataNaoConform = rs2.getString("DATANAOCONFORMIDADE");
                     ocorrencia = rs2.getString("OCORRENCIA");
                     medidaCorrecti = rs2.getString("MEDIDACORRECTIVA");
                     
-                     model.addRow(new Object[]{apagar,idFuncionario, dataNaoConform, ocorrencia, medidaCorrecti});
+                     model.addRow(new Object[]{apagar,nomefuncionario, dataNaoConform, ocorrencia, medidaCorrecti});
                 }
-                st2.close();
-               // con2.close();
+                st2.close();               
             }
             
             st.close();
             con.close();
         }catch (SQLException ex){
             System.err.println("SQLException: " + ex.getMessage());
-        }
-        
-        
-        
-        
-        
-        
+        } 
     }
-    
-    
+        
     
     /* INSERIR */
+    
+    //COM A VERIFICAÇÃO DO C OU NC
     private void InserirNovoControloResultados(){
      
         
@@ -1618,6 +1731,18 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
         
         
+       //dados inseridos a manualmente
+//        idFuncionario = 1;
+//        idAnalise = 0;
+//        idEquipamento = 2;
+//        idInsectocacadores = 0;
+//        data = "203-10-22";
+//        resultado = "C";
+//        fichaTecnica = "";
+//        descricao =  "Descrição ";
+//        outro = "";
+        
+        
         //LIGAÇAO PARA GRAVAR NA BASE DE DADOS
          try {
                 Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -1643,7 +1768,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
           
   
           // ESCREVER CAMPOS NA CONSOLA
-            
+//            System.out.println("\n\n**INSERÇÃO DE DADOS");
 //            System.out.println("FUNCIONARIO: " + idFuncionario); 
 //            System.out.println("ANALISE: " + idAnalise);
 //            System.out.println("EQUIPAMENTO: " + idEquipamento); 
@@ -1653,7 +1778,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 //            System.out.println("FICHA TEC: " + fichaTecnica); 
 //            System.out.println("DESCRICAO: " + descricao);
 //            System.out.println("OUTRO: " + outro );  
-//              
+////              
 //            System.out.println("/n/n");
 //            System.out.println("TIPO: " + comboTipoOP);
 //            System.out.println("OPÇCAO: " + comboOpcao);
@@ -1669,16 +1794,19 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         
         int idConsResultados = 1;
-        int idFuncionario = 1;
+        int idFuncionario = 0;
         String data = (String) sdf.format(jDateChooserControloResultados.getDate());
         String ocorrecia = jTextAreaOcorrenciaNaoConformidade.getText();
         String medidaCorrectiva = jTextAreaMedidaCorrctivaNaoConformidade.getText();
         int idFuncResponsavMedidCorrectiva = 0;
+       
 
-
-        System.out.println("OCOORENCIA : " + ocorrecia);
-        System.out.println("MEDIDA : " + medidaCorrectiva);
-
+        
+        //
+        idConsResultados = addNewNaoConformidadeIDContrResultado;
+        idFuncionario = addNewNaoConformidadeIdFuncionario;
+        
+        
        
         
         //VERIFICAR QUAL O FUNCIONARIO RESPOSAVEL PELA MEDIDA CORRECTIVA
@@ -1710,8 +1838,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         
         }
         
-        
-        
+        // DADOS FICTICIOS
+        idFuncResponsavMedidCorrectiva = 1; 
+        idConsResultados = 1;
         
         //LIGAÇAO PARA GRAVAR NA BASE DE DADOS
         try {
@@ -1736,7 +1865,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             System.err.println("SQLException: " + ex.getMessage());
         }
 
-       
+        
+        System.out.println("\n\n**DADOS DA NAO CONFORMIDADE");
+        System.out.println("IdContrResultados " + idConsResultados);
+        System.out.println("IdFuncionario: " + idFuncionario);
+        System.out.println("Data : " + data);
+        System.out.println("OCOORENCIA : " + ocorrecia);
+        System.out.println("MEDIDA : " + medidaCorrectiva);
+        System.out.println("Funci Responsa: " + idFuncResponsavMedidCorrectiva);
        
     }
     
@@ -1824,9 +1960,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }
     }
     
- 
-    
-    
+    private void LimpaNaoConformidade (){
+        
+        jTextAreaOcorrenciaNaoConformidade.setText("");
+        jTextAreaMedidaCorrctivaNaoConformidade.setText("");
+        
+    }
+       
     
     /*FUNÇAO PARA LER OS CAMPO DE UMA TABELAS*/
     
@@ -1896,6 +2036,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         return resultString;
     }
     
+    
+    /* CARREGAR COMBOBOX*/
+    
+   
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -1954,6 +2102,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxNaoConformidadeFuncionarioResponsav;
     private javax.swing.JComboBox jComboBoxOpcao;
     private javax.swing.JComboBox jComboBoxResultado;
+    private javax.swing.JComboBox jComboBoxSeccao;
     private javax.swing.JComboBox jComboBoxTipo;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooserControloResultados;
@@ -1970,6 +2119,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelConsultaMedidasCorrectivas;
     private javax.swing.JLabel jLabelCorrectivaMedidasCorrectivas;
     private javax.swing.JLabel jLabelData;
