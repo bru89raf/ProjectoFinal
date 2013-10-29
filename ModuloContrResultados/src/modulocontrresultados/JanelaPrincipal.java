@@ -37,11 +37,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     /* VARIAVEIS PARA O IDCONTROLORESULTADO, PARA INSERIR OS DADOS NA TABELA DAS NAO CONFORMIDADES */
     int idControloResultadosID = 0;
     
+    /* ID DO FUNCIONARIO QUE ESTAMOS A SELECCIONAR PARA VER A NAO CONFORMIDADE  */
+    int idFuncionarioNaoConformidade = 0;
     
     /*  VARIAVEIS PARA ADICIONAR UMA NOVA NAO CONFORMIDADE A UM CONTROLO DE RESULTADOS  */
     int addNewNaoConformidadeIdFuncionario = 0;
     int addNewNaoConformidadeIDContrResultado = 0;
     
+    
+    /* JANELA MEDIDAS CORRECTIVIAS */
+    int idNaoConformidadeUpdate = 0;
+    
+    /* SABER QUANTOS REGISTO TEMOS POR NAO CONFORMIDADE, PARA SABER SE É O ULTIMO E 
+     * ACTUALIZAR A TABELA DE CONTROLO DE RESULTADOS */
+    int contaNaoConformidade_MedidasCorrectivas = 0;
+    int idContResultadosUltimo = 0; //CHAVE ESTRANGUEIRA(CONTROLO RESULTADOS) QUE ESTA NA TABELA NAO CONFORMIDADES
     
     
     
@@ -62,7 +72,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialogNovoControloResultados = new javax.swing.JDialog();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelNovoControloResultdos = new javax.swing.JPanel();
         jComboBoxTipo = new javax.swing.JComboBox();
         jComboBoxOpcao = new javax.swing.JComboBox();
         jLabelTipo = new javax.swing.JLabel();
@@ -85,7 +95,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jLabelFuncionario = new javax.swing.JLabel();
         jComboBoxFuncionario = new javax.swing.JComboBox();
         jDialogNaoConformidades = new javax.swing.JDialog();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelNaoConformidades = new javax.swing.JPanel();
         jLabelDataNaoConformidade = new javax.swing.JLabel();
         jLabelOcorrecniaNaoConformidade = new javax.swing.JLabel();
         jLabelMedidaCorrectivaNaoConformidade = new javax.swing.JLabel();
@@ -95,7 +105,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jTextAreaMedidaCorrctivaNaoConformidade = new javax.swing.JTextArea();
         jButtonGravarNaoConformidade = new javax.swing.JButton();
         jButtonCancelarNaoConformidade = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserNaoConformidade = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxNaoConformidadeFuncionarioResponsav = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
@@ -103,16 +113,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jLabelMedidasCorrectivas = new javax.swing.JLabel();
         jPanelMedidasCorrectivas = new javax.swing.JPanel();
         jLabelDataMedidasCorrectivas = new javax.swing.JLabel();
-        jLabelCorrectivaMedidasCorrectivas = new javax.swing.JLabel();
         jLabelObservacaoMedidasCorrectivas = new javax.swing.JLabel();
-        jComboBoxCorrectivaMedidaCorrectiva = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaObservacaoMedidaCorrectiva = new javax.swing.JTextArea();
         jDateChooserMedidaCorrectiva = new com.toedter.calendar.JDateChooser();
         jButtonGravarMedidaCorrectiva = new javax.swing.JButton();
         jButtonCancelarMedidaCorrectiva = new javax.swing.JButton();
         jDialogConsultarControlos = new javax.swing.JDialog();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelConsultaControlos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPaneConsultarControlos = new javax.swing.JScrollPane();
         jTableConsultarControlos = new javax.swing.JTable();
@@ -122,12 +130,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jComboBoxSeccao = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jDialogConsultaNaoConformidades = new javax.swing.JDialog();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelConsultaNaoConformidades = new javax.swing.JPanel();
         jLabelNaoConformidades = new javax.swing.JLabel();
         jScrollPaneNaoConformidades = new javax.swing.JScrollPane();
         jTableNaoConformidades = new javax.swing.JTable();
         jButtonVoltar = new javax.swing.JButton();
         jButtonAddNovaNaoConformidade = new javax.swing.JButton();
+        jButtonAddMedidaCorrectiva = new javax.swing.JButton();
         jDialogConsultarMedidasCorrectivas = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jLabelConsultaMedidasCorrectivas = new javax.swing.JLabel();
@@ -146,7 +155,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jDialogNovoControloResultados.setTitle("NOVO CONTROLO DE RESULTADOS");
         jDialogNovoControloResultados.setMinimumSize(new java.awt.Dimension(548, 740));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Controlo de Resultados"));
+        jPanelNovoControloResultdos.setBorder(javax.swing.BorderFactory.createTitledBorder("Controlo de Resultados"));
 
         jComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-- TIPO--", "INSECTOCACADORES", "EQUIPAMENTO", "ANALISE", "Outro", " " }));
         jComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -229,40 +238,40 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelNovoControloResultdosLayout = new javax.swing.GroupLayout(jPanelNovoControloResultdos);
+        jPanelNovoControloResultdos.setLayout(jPanelNovoControloResultdosLayout);
+        jPanelNovoControloResultdosLayout.setHorizontalGroup(
+            jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
+                        .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelResultado)
                             .addComponent(jLabelFichaTecnica)
                             .addComponent(jLabelData)
                             .addComponent(jLabelDescricao))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel3))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jComboBoxResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
                                         .addComponent(jButtonInserir)
                                         .addGap(60, 60, 60)
                                         .addComponent(jButtonCancelar))
                                     .addComponent(jLabel2)
                                     .addComponent(jDateChooserControloResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPaneDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
+                        .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTipo)
                             .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelOutraOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelOpcao)
                             .addComponent(jComboBoxOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -270,43 +279,43 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelNovoControloResultdosLayout.setVerticalGroup(
+            jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNovoControloResultdosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelFuncionario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTipo)
                     .addComponent(jLabelOpcao))
                 .addGap(4, 4, 4)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelOutraOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelData)
                     .addComponent(jDateChooserControloResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelResultado)
                     .addComponent(jComboBoxResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFichaTecnica)
                     .addComponent(jLabel3))
                 .addGap(28, 28, 28)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelDescricao)
                     .addComponent(jScrollPaneDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelNovoControloResultdosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonInserir)
                     .addComponent(jButtonCancelar))
                 .addGap(37, 37, 37))
@@ -318,21 +327,21 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             jDialogNovoControloResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogNovoControloResultadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelNovoControloResultdos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         jDialogNovoControloResultadosLayout.setVerticalGroup(
             jDialogNovoControloResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogNovoControloResultadosLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelNovoControloResultdos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jDialogNaoConformidades.setTitle("NOVA NÃO CONFORMIDADE");
         jDialogNaoConformidades.setMinimumSize(new java.awt.Dimension(435, 670));
 
-        jPanel3.setMinimumSize(new java.awt.Dimension(200, 150));
+        jPanelNaoConformidades.setMinimumSize(new java.awt.Dimension(200, 150));
 
         jLabelDataNaoConformidade.setText("Data");
 
@@ -363,55 +372,55 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jDateChooserNaoConformidade.setDateFormatString("yyyy-MM-dd");
 
         jLabel6.setText("Funcionario Responsavel");
 
         jComboBoxNaoConformidadeFuncionarioResponsav.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        javax.swing.GroupLayout jPanelNaoConformidadesLayout = new javax.swing.GroupLayout(jPanelNaoConformidades);
+        jPanelNaoConformidades.setLayout(jPanelNaoConformidadesLayout);
+        jPanelNaoConformidadesLayout.setHorizontalGroup(
+            jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
+                .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jScrollPanemedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabelMedidaCorrectivaNaoConformidade))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                                 .addGap(75, 75, 75)
                                 .addComponent(jScrollPaneOcorrencia, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                                         .addComponent(jLabelDataNaoConformidade)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jDateChooserNaoConformidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabelOcorrecniaNaoConformidade)))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                                 .addComponent(jButtonGravarNaoConformidade)
                                 .addGap(28, 28, 28)
                                 .addComponent(jButtonCancelarNaoConformidade))
                             .addComponent(jComboBoxNaoConformidadeFuncionarioResponsav, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelNaoConformidadesLayout.setVerticalGroup(
+            jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelDataNaoConformidade)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooserNaoConformidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(jLabelOcorrecniaNaoConformidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -425,7 +434,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jComboBoxNaoConformidadeFuncionarioResponsav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGravarNaoConformidade)
                     .addComponent(jButtonCancelarNaoConformidade))
                 .addGap(67, 67, 67))
@@ -445,7 +454,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(jDialogNaoConformidadesLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanelNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jDialogNaoConformidadesLayout.setVerticalGroup(
@@ -454,7 +463,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -466,16 +475,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabelDataMedidasCorrectivas.setText("Data");
 
-        jLabelCorrectivaMedidasCorrectivas.setText("Correctiva");
-
         jLabelObservacaoMedidasCorrectivas.setText("Observação");
-
-        jComboBoxCorrectivaMedidaCorrectiva.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Opção--", "Sim", "Não" }));
-        jComboBoxCorrectivaMedidaCorrectiva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCorrectivaMedidaCorrectivaActionPerformed(evt);
-            }
-        });
 
         jScrollPane1.setMinimumSize(new java.awt.Dimension(200, 150));
 
@@ -504,29 +504,24 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
                 .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
-                        .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabelObservacaoMedidasCorrectivas))
-                            .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
-                                .addGap(90, 90, 90)
-                                .addComponent(jLabelDataMedidasCorrectivas)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jDateChooserMedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabelCorrectivaMedidasCorrectivas)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBoxCorrectivaMedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
                         .addGap(122, 122, 122)
-                        .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
-                                .addComponent(jButtonGravarMedidaCorrectiva)
-                                .addGap(39, 39, 39)
-                                .addComponent(jButtonCancelarMedidaCorrectiva))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addComponent(jButtonGravarMedidaCorrectiva)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButtonCancelarMedidaCorrectiva))
+                    .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabelDataMedidasCorrectivas)
+                        .addGap(31, 31, 31)
+                        .addComponent(jDateChooserMedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMedidasCorrectivasLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMedidasCorrectivasLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelObservacaoMedidasCorrectivas))
+                .addGap(59, 59, 59))
         );
         jPanelMedidasCorrectivasLayout.setVerticalGroup(
             jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,15 +530,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelDataMedidasCorrectivas)
                     .addComponent(jDateChooserMedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCorrectivaMedidasCorrectivas)
-                    .addComponent(jComboBoxCorrectivaMedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jLabelObservacaoMedidasCorrectivas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
                 .addGroup(jPanelMedidasCorrectivasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGravarMedidaCorrectiva)
                     .addComponent(jButtonCancelarMedidaCorrectiva))
@@ -571,7 +562,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabelMedidasCorrectivas)
                 .addGap(34, 34, 34)
                 .addComponent(jPanelMedidasCorrectivas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jDialogConsultarControlos.setTitle("CONSULTAR CONTROLOS DE RESULTADOS");
@@ -585,11 +576,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Funcionario", "Analise", "Equipamento", "Insectador", "Data", "Resultado", "Ficha Tecnica", "Descrição", "Outro"
+                "Funcionario", "Secção", "Data", "Resultado", "Ficha Tecnica", "Descrição"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -624,7 +615,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxSeccao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Sessão--", "Analises", "Equipamentos", "Insectadores", "Outros", " " }));
+        jComboBoxSeccao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Sessão--", "ANALISE", "EQUIPAMENTO", "INSECTOCACADORES", "OUTROS" }));
         jComboBoxSeccao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxSeccaoActionPerformed(evt);
@@ -633,46 +624,46 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
         jLabel7.setText("Secção");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelConsultaControlosLayout = new javax.swing.GroupLayout(jPanelConsultaControlos);
+        jPanelConsultaControlos.setLayout(jPanelConsultaControlosLayout);
+        jPanelConsultaControlosLayout.setHorizontalGroup(
+            jPanelConsultaControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaControlosLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelConsultaControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneConsultarControlos)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(jPanelConsultaControlosLayout.createSequentialGroup()
                         .addComponent(jButtonCriaNovoControloResultados)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonFecharConsultaControlosResultados)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(jPanelConsultaControlosLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBoxSeccao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonVerNaoConformidade)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultaControlosLayout.createSequentialGroup()
                 .addContainerGap(415, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(397, 397, 397))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jPanelConsultaControlosLayout.setVerticalGroup(
+            jPanelConsultaControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaControlosLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelConsultaControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonVerNaoConformidade, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanelConsultaControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBoxSeccao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPaneConsultarControlos, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelConsultaControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonFecharConsultaControlosResultados)
                     .addComponent(jButtonCriaNovoControloResultados))
                 .addContainerGap(71, Short.MAX_VALUE))
@@ -684,14 +675,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             jDialogConsultarControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogConsultarControlosLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelConsultaControlos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jDialogConsultarControlosLayout.setVerticalGroup(
             jDialogConsultarControlosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogConsultarControlosLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelConsultaControlos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -705,7 +696,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cont Resulta", "Funcionario", "Data(Ñ Confor)", "Ocorrencia", "Medida Correct.", "Func. Responsav."
+                "NC", "Funcionario", "Data(Ñ Confor)", "Ocorrencia", "Medida Correct.", "Func. Responsav."
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -732,38 +723,48 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+        jButtonAddMedidaCorrectiva.setText("Medida Correctiva");
+        jButtonAddMedidaCorrectiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddMedidaCorrectivaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelConsultaNaoConformidadesLayout = new javax.swing.GroupLayout(jPanelConsultaNaoConformidades);
+        jPanelConsultaNaoConformidades.setLayout(jPanelConsultaNaoConformidadesLayout);
+        jPanelConsultaNaoConformidadesLayout.setHorizontalGroup(
+            jPanelConsultaNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaNaoConformidadesLayout.createSequentialGroup()
+                .addGroup(jPanelConsultaNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelConsultaNaoConformidadesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPaneNaoConformidades, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanelConsultaNaoConformidadesLayout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addComponent(jLabelNaoConformidades)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanelConsultaNaoConformidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(186, 186, 186)
+                .addGap(83, 83, 83)
                 .addComponent(jButtonAddNovaNaoConformidade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonAddMedidaCorrectiva, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanelConsultaNaoConformidadesLayout.setVerticalGroup(
+            jPanelConsultaNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaNaoConformidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelNaoConformidades)
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPaneNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelConsultaNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVoltar)
-                    .addComponent(jButtonAddNovaNaoConformidade))
+                    .addComponent(jButtonAddNovaNaoConformidade)
+                    .addComponent(jButtonAddMedidaCorrectiva))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -773,14 +774,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             jDialogConsultaNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogConsultaNaoConformidadesLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelConsultaNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jDialogConsultaNaoConformidadesLayout.setVerticalGroup(
             jDialogConsultaNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialogConsultaNaoConformidadesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelConsultaNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -942,7 +943,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jButtonConsultarMedidasCorrectivas)
-                        .addContainerGap(26, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
@@ -1048,7 +1049,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jButtonControlosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonControlosActionPerformed
         // ABRIR JANELA DE CONSULTAS DE RESULTADOS DE CONTROLO
         LimpaTabelaConsultarControlos();
-        LerBDControloResultados();
+        
+        jComboBoxOpcao.setEnabled(true);
+        
+        jTextFieldOutraOpcao.setText("");
+        jTextFieldOutraOpcao.setEnabled(true);
+       
+        jTextAreaDescricao.setText("");
         
         jDialogConsultarControlos.setLocationRelativeTo(this);
         jDialogConsultarControlos.setVisible(true);
@@ -1083,6 +1090,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void jButtonCriaNovoControloResultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCriaNovoControloResultadosActionPerformed
         // CRIAR NOVA CONTROLO DE RESULTADOS
         
+        //COMBOBOX FUNCIONARIO CARREGAR DADOS
+        LerBDFuncionario();
         jDialogConsultarControlos.setVisible(false);
         jDialogNovoControloResultados.setLocationRelativeTo(this);
         jDialogNovoControloResultados.setVisible(true);
@@ -1102,9 +1111,9 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             String nomeFunc = (String) jTableConsultarControlos.getValueAt(linha, 0);
             //System.out.println("Nome: " + nomeFunc);
 
-            String resultado = (String) jTableConsultarControlos.getValueAt(linha, 5);
+            String resultado = (String) jTableConsultarControlos.getValueAt(linha, 3);
            
-            int idFuncionario = 0;
+            idFuncionarioNaoConformidade = 0;
             
             
             //VERIFICAR SE A LINHA QUE ESTAMOS A SELECCINAR, O RESILTADO É
@@ -1116,13 +1125,13 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 jDialogConsultaNaoConformidades.setLocationRelativeTo(this);
 
                 //DEVOLVE O ID DO FUNCIONARIO
-                idFuncionario = selectId("FUNCIONARIO", "Nome", nomeFunc, "IDFUNCIONARIO");
+                idFuncionarioNaoConformidade = selectId("FUNCIONARIO", "Nome", nomeFunc, "IDFUNCIONARIO");
                 //System.out.println("IDFUNCIONARIO TABELA -> " + idFuncionario);
                
 
                 //DEVOLVE O IDCONTRESULTADO ONDE O FUNCIONARIO É = AO QUE VEM DE CIMA
                 LimpaTabelaConsultaNaoConformidades();
-                ConsultaBDNaoConformidadeSelect(idFuncionario);
+                ConsultaBDNaoConformidadeSelect(idFuncionarioNaoConformidade);
             } else {
                 JOptionPane.showMessageDialog(null, "Linha Selecciona não contem Nehuma Não Conformidade ! ");
             }
@@ -1136,22 +1145,36 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         //BOTAO FECHAR A JANELA CONTROLO DE RESULTADOS
+         jComboBoxOpcao.setEnabled(true);
+        
+        jTextFieldOutraOpcao.setText("");
+        jTextFieldOutraOpcao.setEnabled(true);
+        
         jDialogNovoControloResultados.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    private void jComboBoxCorrectivaMedidaCorrectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCorrectivaMedidaCorrectivaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxCorrectivaMedidaCorrectivaActionPerformed
-
     private void jButtonGravarMedidaCorrectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGravarMedidaCorrectivaActionPerformed
-        // BOTAO GUARDAR MEDIDA CORRETIVas  
-        
-        int resultMedidaCorrectiva = JOptionPane.showConfirmDialog(jDialogMedidasCorrectiva, "Deseja Guardar os dados ?", null, JOptionPane.YES_NO_OPTION);
-        
-        if (resultMedidaCorrectiva == JOptionPane.YES_OPTION){
-            GravarMedidaCorrectivas();
+        // BOTAO GUARDAR MEDIDA CORRETIVAS
+      
+        //SE FOR = 1 QUER DIZER QUE ESTA É A ULTIMA NAO CONFORMIDADE
+        if (contaNaoConformidade_MedidasCorrectivas == 0){
+           
+            
+        } else{//SE FOR DIFENTE DE 1 QUER DIZER QUE TEMOS MAIS NAO CONFORMIDADES
+            ActualizaMedidaCorrectiva();
+            //ATUALIZAR A TABELA NAO CONFORMIDADES
+            LimpaTabelaConsultaNaoConformidades();
+            ConsultaBDNaoConformidadeSelect(idFuncionarioNaoConformidade);
+            
+            jTextAreaObservacaoMedidaCorrectiva.setText("");
             jDialogMedidasCorrectiva.setVisible(false);
-        } 
+        }
+        
+       
+        
+        
+        
+        
     }//GEN-LAST:event_jButtonGravarMedidaCorrectivaActionPerformed
 
     private void jButtonConsultarMedidasCorrectivasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarMedidasCorrectivasActionPerformed
@@ -1187,22 +1210,35 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void jComboBoxSeccaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSeccaoActionPerformed
         //QUAL A SESSAO QUE VAMOS CARREGAAR PARA  A TABELA
-//        String comboPesquisa = jComboBoxSeccao.getSelectedItem().toString();
-//        
-//        if (comboPesquisa.equals("Analises")){
-//            comboSeccaoOP = "Analises";
-//            
-//        }else if (comboPesquisa.equals("Equipamentos")){
-//          comboSeccaoOP = "Equipamentos";
-//            
-//        }else if (comboPesquisa.equals("Insectadores")){
-//           comboSeccaoOP = "Insectadores";
-//            
-//            
-//        }else if (comboPesquisa.equals("Outros")){
-//            comboSeccaoOP = "Outros";
-//        }
-//        
+        String comboPesquisa = jComboBoxSeccao.getSelectedItem().toString();
+        String nomeColuna = "";
+        
+        if (comboPesquisa.equals("ANALISE")){
+            LimpaTabelaConsultarControlos();
+            nomeColuna = "IDANALISE";
+            LerBDControloResultados(nomeColuna);
+            
+        }else if (comboPesquisa.equals("EQUIPAMENTO")){
+            LimpaTabelaConsultarControlos();
+            nomeColuna = "IDEQUIPAMENTO";
+            LerBDControloResultados(nomeColuna);
+            
+        }else if (comboPesquisa.equals("INSECTOCACADORES")){
+            LimpaTabelaConsultarControlos();
+            nomeColuna = "IDINSECTOCACADORES";
+            LerBDControloResultados(nomeColuna);
+            
+            
+        }else if (comboPesquisa.equals("OUTROS")){
+            LimpaTabelaConsultarControlos();
+            nomeColuna = "OUTROS";
+            LerBDControloResultados(nomeColuna);
+           
+        }
+        
+        System.out.println("--OPÇÃO MOSTRAR NA TABELA CONSULTA CONTROLO DE RESULADOS");
+        System.out.println("OP : " + comboPesquisa);
+        
 //        LimpaTabelaConsultarControlos();
 //        LerBDControloResultados();
 
@@ -1241,24 +1277,46 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         //BOTAO FEXHAR JANELA MEDIDAS CORRECTIVAS
         jDialogMedidasCorrectiva.setVisible(false);
     }//GEN-LAST:event_jButtonCancelarMedidaCorrectivaActionPerformed
- 
-     
+
+    private void jButtonAddMedidaCorrectivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMedidaCorrectivaActionPerformed
+        // ADICIONAR MEDIDA CORRECTIVA
+      
+        int linha = jTableNaoConformidades.getSelectedRow();
+        idNaoConformidadeUpdate = 0;
+          
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione Uma Linha da Tabela de Não Conformidade");
+        }else{
+            //VER O ID DA NAO CONFORMIDADE
+            idNaoConformidadeUpdate = (int) jTableNaoConformidades.getValueAt(linha, 0);
+                                    
+            System.out.println("\n****** NAO CONFORMIDADE -> MEDIDA CORRECTIVA");
+            System.out.println("ID NAO CONFOMRIDADE UPDATE: " + idNaoConformidadeUpdate);
+            jDialogMedidasCorrectiva.setLocationRelativeTo(this);
+            jDialogMedidasCorrectiva.setVisible(true);
+            
+        }
+    }//GEN-LAST:event_jButtonAddMedidaCorrectivaActionPerformed
     
     
     /* LER */ 
        
-    private void LerBDControloResultados(){
+    private void LerBDControloResultados(String nomeColuna){
      
         int idFuncionario = 0; 
         String nomeFuncionario ="";
-        int idAnalise = 0;
-        int idEquipamento = 0;
-        int idInsectad = 0;
+
         String data = "";
         String resultado = "";
         String fichaTecnica = "";
         String descricao = "";
         String outro = "";
+        
+        String nomeSeccao = ""; // ir a tabela buscar o nome da tabela em questao!
+        int colunaID = 0;
+        String coluna =  nomeColuna;
+        
+        int numeroRegistos = 0;
         
         model = (DefaultTableModel) jTableConsultarControlos.getModel();
         
@@ -1282,19 +1340,52 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             while(rs.next()){
                 idFuncionario = rs.getInt("IDFUNCIONARIO");
                 nomeFuncionario = selectString("FUNCIONARIO","IDFUNCIONARIO",idFuncionario,"NOME"); 
-               
-                idAnalise =  rs.getInt("IDANALISE");
-                idEquipamento = rs.getInt("IDEQUIPAMENTO");
-                idInsectad =  rs.getInt("IDINSECTOCACADORES");
+                
+                if (!coluna.equals("OUTROS")){
+                    colunaID = rs.getInt(coluna);
+                }
+                
+                
+                //VERIFICAR QUAL A COLUNA  E IR A TABELA CERTA BUSCAR O NOME
+                if (coluna.equals("IDANALISE")){
+                    nomeSeccao = selectString("ANALISES","IDANALISE",colunaID,"NOME");
+                
+                }else if (coluna.equals("IDEQUIPAMENTO")){
+                     nomeSeccao = selectString("EQUIPAMENTO","IDEQUIPAMENTO",colunaID,"NOME");
+                     
+                }else if (coluna.equals("IDINSECTOCACADORES")){
+                    nomeSeccao = selectString("INSECTOCACADORES","IDINSECTOCACADORES",colunaID,"NOME");
+                
+                }
+                
+                outro = rs.getString(coluna);
+                System.out.println("OUTRO: " + outro);
+                
                 data = rs.getString("DATA");
                 resultado = rs.getString("RESULTADO");
                 fichaTecnica = rs.getString("FICHATECNICA");
                 descricao = rs.getString("DESCRICAO");
-                outro = rs.getString("outros");
+              
                 
-                model.addRow(new Object[]{nomeFuncionario, idAnalise, idEquipamento, idInsectad, data, resultado, fichaTecnica, descricao, outro});
-                                
+                if (!coluna.equals("OUTROS")){
+                    if (colunaID != 0){
+                        model.addRow(new Object[]{nomeFuncionario,nomeSeccao , data, resultado, fichaTecnica, descricao});
+                        numeroRegistos++;
+                    }
+                }else{
+                    if (outro != null ){
+                         model.addRow(new Object[]{nomeFuncionario,outro , data, resultado, fichaTecnica, descricao});
+                         numeroRegistos++;
+                    }
+                }
+                                  
             }
+            
+            //QUANDO NAO EXISTE NENHUM REGISTO INSERIDO
+            if ( numeroRegistos == 0){
+                   JOptionPane.showMessageDialog(jDialogConsultarControlos, "Não Existe Nenhum Registo Nesta Secção ! ");
+               } 
+            
             
             st.close();
             con.close();
@@ -1528,16 +1619,20 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private void ConsultaBDNaoConformidadeSelect(int idFuncionarioSelecc ){
         int funcionario = idFuncionarioSelecc;
         
-        int apagar = 0;
+        int idNaoConformidade = 0;
+        int idContResultado = 0;
         int idFuncionario = 0;
         String dataNaoConform = "";
         String ocorrencia = "";
         String medidaCorrecti = "";
         String resultado = "NC";
         String nomefuncionario = "";
-        
-         model = (DefaultTableModel) jTableNaoConformidades.getModel();
-                
+        String correctiva = "N";
+        int idFuncionarioResponsavel = 0;
+        String nomeFuncionarioResponsavel = "";
+   
+        model = (DefaultTableModel) jTableNaoConformidades.getModel();
+        contaNaoConformidade_MedidasCorrectivas = 0; 
         //Ligação BD
         try{
             Class.forName("org.apache.derby.jdbc.ClientDriver");  
@@ -1563,19 +1658,29 @@ public class JanelaPrincipal extends javax.swing.JFrame {
                 addNewNaoConformidadeIdFuncionario = funcionario;
                 //ESCREVER NA TABELA A PESQUISA
                 String nomeTabela2 = "NAOCONFORMIDADES";
-                String sql2 = "select * from "+nomeTabela2+" where IDCONTRESULTADOS="+idControloResultadosID;
+                String sql2 = "select * from "+nomeTabela2+" where IDCONTRESULTADOS="+idControloResultadosID+" and CORRECTIVA='"  + correctiva + "'";
                 PreparedStatement st2 = (PreparedStatement) con.prepareStatement(sql2);
                 ResultSet rs2 = st2.executeQuery();
                 
                 while(rs2.next()){
-                    apagar = rs2.getInt("IDCONTRESULTADOS");
+                    
+                    idNaoConformidade = rs2.getInt("IDNAOCONF");
+                    idContResultado = rs2.getInt("IDCONTRESULTADOS");
+                    
                     idFuncionario = rs2.getInt("IDFUNCIONARIO");
                     nomefuncionario = selectString("FUNCIONARIO","IDFUNCIONARIO",idFuncionario,"NOME"); 
+                    
                     dataNaoConform = rs2.getString("DATANAOCONFORMIDADE");
                     ocorrencia = rs2.getString("OCORRENCIA");
                     medidaCorrecti = rs2.getString("MEDIDACORRECTIVA");
                     
-                     model.addRow(new Object[]{apagar,nomefuncionario, dataNaoConform, ocorrencia, medidaCorrecti});
+                    idFuncionarioResponsavel = rs2.getInt("IDFUNCIONARIOMEDIDACORRECTIVA");
+                    nomeFuncionarioResponsavel = selectString("FUNCIONARIO","IDFUNCIONARIO",idFuncionarioResponsavel,"NOME"); 
+                    
+                    model.addRow(new Object[]{idNaoConformidade,nomefuncionario, dataNaoConform, ocorrencia, medidaCorrecti, nomeFuncionarioResponsavel});
+                    
+                    contaNaoConformidade_MedidasCorrectivas++;
+                    idContResultadosUltimo = idContResultado;
                 }
                 st2.close();               
             }
@@ -1585,6 +1690,24 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         }catch (SQLException ex){
             System.err.println("SQLException: " + ex.getMessage());
         } 
+        
+        /* VERIFICAR SE É O ULTIMO OU NAO NA LISTA *
+         * IR A TABELA CONTROLO RESULTADOS ALTERAR O VALOR DO RESULTADO*/
+        if (contaNaoConformidade_MedidasCorrectivas == 0){
+            //ACTUALIZAR OS DADOS NA TABELA NAO CONFORMIDADES
+            ActualizaMedidaCorrectiva();
+            //ACTUALIZAR A TABELA DE CONTROLO DE RESULTADOS
+            JOptionPane.showMessageDialog(jDialogMedidasCorrectiva, "IRÁ SER ALERADO O RESULTADO DO CONTROLO DE RESULTADO!");
+            ActualizaControloResultado();
+            jTextAreaObservacaoMedidaCorrectiva.setText("");
+            jDialogMedidasCorrectiva.setVisible(false);
+            jDialogConsultaNaoConformidades.setVisible(false);
+        }
+        
+        
+        System.out.println("\n*** NUMERO DE REGISTO DE NAO CONFORMIDADES");
+        System.out.println("REGISTOS: " + contaNaoConformidade_MedidasCorrectivas);
+        System.out.println("ID ULTIMO: " +idContResultadosUltimo);
     }
         
     
@@ -1768,24 +1891,22 @@ public class JanelaPrincipal extends javax.swing.JFrame {
           
   
           // ESCREVER CAMPOS NA CONSOLA
-//            System.out.println("\n\n**INSERÇÃO DE DADOS");
-//            System.out.println("FUNCIONARIO: " + idFuncionario); 
-//            System.out.println("ANALISE: " + idAnalise);
-//            System.out.println("EQUIPAMENTO: " + idEquipamento); 
-//            System.out.println("INSECTICADO: " + idInsectocacadores);
-//            System.out.println("DATA: " + data);
-//            System.out.println("RESULTADO: " + resultado);
-//            System.out.println("FICHA TEC: " + fichaTecnica); 
-//            System.out.println("DESCRICAO: " + descricao);
-//            System.out.println("OUTRO: " + outro );  
-////              
-//            System.out.println("/n/n");
-//            System.out.println("TIPO: " + comboTipoOP);
-//            System.out.println("OPÇCAO: " + comboOpcao);
-//            System.out.println("IDENCONTR: " + idOpcaoEscolhida);
+            System.out.println("\n\n***** INSERÇÃO DE DADOS NA TABELA CONTROLO DE RESULTADOS");
+            System.out.println("FUNCIONARIO: " + idFuncionario); 
+            System.out.println("ANALISE: " + idAnalise);
+            System.out.println("EQUIPAMENTO: " + idEquipamento); 
+            System.out.println("INSECTICADO: " + idInsectocacadores);
+            System.out.println("DATA: " + data);
+            System.out.println("RESULTADO: " + resultado);
+            System.out.println("FICHA TEC: " + fichaTecnica); 
+            System.out.println("DESCRICAO: " + descricao);
+            System.out.println("OUTRO: " + outro );  
             
-        
-       // System.out.println("comboResultado : " + comboResultado); 
+//            System.out.println("/n OPÇOES ESCOLHIDAS");
+//            System.out.println("COMBO TIPO: " + comboTipoOP);
+//            System.out.println("COMBO OPÇCAO: " + comboOpcao);
+//            System.out.println("ID OPÇAO ESCOLHIDA: " + idOpcaoEscolhida);      
+//            System.out.println("comboResultado : " + comboResultado); 
         
     }
        
@@ -1795,14 +1916,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         
         int idConsResultados = 1;
         int idFuncionario = 0;
-        String data = (String) sdf.format(jDateChooserControloResultados.getDate());
+        String data = (String) sdf.format(jDateChooserNaoConformidade.getDate());
         String ocorrecia = jTextAreaOcorrenciaNaoConformidade.getText();
         String medidaCorrectiva = jTextAreaMedidaCorrctivaNaoConformidade.getText();
         int idFuncResponsavMedidCorrectiva = 0;
+        String correctiva = "";
        
 
         
-        //
+        //DADOS FICITCIOS
         idConsResultados = addNewNaoConformidadeIDContrResultado;
         idFuncionario = addNewNaoConformidadeIdFuncionario;
         
@@ -1841,6 +1963,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         // DADOS FICTICIOS
         idFuncResponsavMedidCorrectiva = 1; 
         idConsResultados = 1;
+        correctiva = "N";
         
         //LIGAÇAO PARA GRAVAR NA BASE DE DADOS
         try {
@@ -1853,8 +1976,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         try {
             con = DriverManager.getConnection(url);
             String nomeTabela = "NAOCONFORMIDADES";
-            sql = "insert into " + nomeTabela + "(IDCONTRESULTADOS,IDFUNCIONARIO, DATANAOCONFORMIDADE, OCORRENCIA, MEDIDACORRECTIVA, IDFUNCIONARIOMEDIDACORRECTIVA)"
-                    + " values ("+idConsResultados + "," +idFuncionario+ "," + "'" +data+ "'" + "," + "'"+ocorrecia+ "'" + "," + "'" + medidaCorrectiva+"'" + "," +idFuncResponsavMedidCorrectiva   +")";
+            sql = "insert into " + nomeTabela + "(IDCONTRESULTADOS,IDFUNCIONARIO, DATANAOCONFORMIDADE, OCORRENCIA, MEDIDACORRECTIVA, IDFUNCIONARIOMEDIDACORRECTIVA, CORRECTIVA)"
+                    + " values ("+idConsResultados + "," +idFuncionario+ "," + "'" +data+ "'" + "," + "'"+ocorrecia+ "'" + "," + "'" + medidaCorrectiva+"'" + "," +idFuncResponsavMedidCorrectiva + "," + "'" + correctiva + "'"  +")";
 
             PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
             st.executeUpdate();
@@ -1876,60 +1999,86 @@ public class JanelaPrincipal extends javax.swing.JFrame {
        
     }
     
-    private void GravarMedidaCorrectivas(){
-         
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-         
-         //DADOS A LER DA JANELA
-         int idFuncionarioMedCorrect = 1;
-         String dataMedCorrect = sdf.format(jDateChooserMedidaCorrectiva.getDate());
-         int correctiva = 3;
-         String observacaoMedCorrect = jTextAreaObservacaoMedidaCorrectiva.getText();
-         
+     /* UPDATE */
+    /* vai actualizar a tabela nao conformidades, onde estao
+     * os campos das MEDIDAS CORRECTIVAS  */
+    private void ActualizaMedidaCorrectiva(){
+               
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         
-         //VERIFICAR O VALOR DA COMBOBOX RESULTADO 
-         String comboResultado = jComboBoxCorrectivaMedidaCorrectiva.getSelectedItem().toString();
-         
-         if (!comboResultado.equals("--Opção--")){
-             
-             if (comboResultado.equals("Sim")){
-                 correctiva = 0;
-             } else if (comboResultado.equals("Não")){
-                 correctiva = 1;
-             }
-         }
-         
-      
-         System.out.println("correctiva: " + correctiva);
-        System.out.println("DATA: " + dataMedCorrect);
-
-         try {
+       //LER DADOS DA JANELA 
+        String data = (String) sdf.format(jDateChooserMedidaCorrectiva.getDate());
+        String correctiva = "S";
+        String observacaoMedidaCorrectiva = jTextAreaObservacaoMedidaCorrectiva.getText();
+        
+               
+        try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException e) { //driver não encontrado
             System.err.print("ClassNotFoundException: ");
             System.err.println(e.getMessage());
             System.out.println("O driver expecificado nao foi encontrado.");
         }
+
         try {
             con = DriverManager.getConnection(url);
             String nomeTabela = "NAOCONFORMIDADES";
-            sql = "insert into " + nomeTabela + "(DATAMEDIDACORRECTIVA, CORRECTIVA, OBSERVACAOMEDIDACORRECTIVA)"
-                    + " values ("+ "'" + dataMedCorrect + "'" + "," + correctiva + "," + "'" + observacaoMedCorrect + "'"   +")";
-
+            String sql = "UPDATE "+ nomeTabela + " SET DATAMEDIDACORRECTIVA='" + data +"'"+","+" CORRECTIVA='"+correctiva+"'," + " OBSERVACAOMEDIDACORRECTIVA='"+observacaoMedidaCorrectiva+"' WHERE IDNAOCONF= " + idNaoConformidadeUpdate;
             PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
             st.executeUpdate();
-           
+
+            
             st.close();
             con.close();
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         }
-         
-         
-         
-         
+    
+        
+        
+        
+         /*  DADOS NA CONSOLA -> GRAVAR MEDIDA CORRECTIVA   */
+        System.out.println("\n*** MEDIDAS CORRECTIVAS -> UPDATE ");
+        System.out.println("ID NAO CONFORMIDADE: " + idNaoConformidadeUpdate);
+        System.out.println("DATA MEDIDA CORRECTIVA: " + data);
+        System.out.println("CORRECTIVA: " + correctiva);
+        System.out.println("OBSERVAÇÃO MED. CORREC: " + observacaoMedidaCorrectiva);
+        
+        
+        
     }
     
+    //ACTUALIZAR TABELA CONTROLO RESULTADOS, C OU NC
+    private void ActualizaControloResultado(){
+        
+        String resultado =  "C";
+  
+        
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        } catch (ClassNotFoundException e) { //driver não encontrado
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+            System.out.println("O driver expecificado nao foi encontrado.");
+        }
+        
+         try {
+            con = DriverManager.getConnection(url);
+            String nomeTabela = "CONTROLORESULTADOS";
+            String sql = "UPDATE "+ nomeTabela + " SET RESULTADO='"+resultado+"' WHERE IDCONTRESULTADOS=" + idContResultadosUltimo;
+            PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
+            st.executeUpdate();
+
+            
+            st.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    
+        
+    }
+        
     
     /*LIMPAR*/
     
@@ -2037,8 +2186,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     }
     
     
-    /* CARREGAR COMBOBOX*/
-    
+   
    
     
     
@@ -2081,6 +2229,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAddMedidaCorrectiva;
     private javax.swing.JButton jButtonAddNovaNaoConformidade;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCancelarMedidaCorrectiva;
@@ -2097,16 +2246,15 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonVerNaoConformidade;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JButton jButtonVoltarMedidasCorrectivas;
-    private javax.swing.JComboBox jComboBoxCorrectivaMedidaCorrectiva;
     private javax.swing.JComboBox jComboBoxFuncionario;
     private javax.swing.JComboBox jComboBoxNaoConformidadeFuncionarioResponsav;
     private javax.swing.JComboBox jComboBoxOpcao;
     private javax.swing.JComboBox jComboBoxResultado;
     private javax.swing.JComboBox jComboBoxSeccao;
     private javax.swing.JComboBox jComboBoxTipo;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooserControloResultados;
     private com.toedter.calendar.JDateChooser jDateChooserMedidaCorrectiva;
+    private com.toedter.calendar.JDateChooser jDateChooserNaoConformidade;
     private javax.swing.JDialog jDialogConsultaNaoConformidades;
     private javax.swing.JDialog jDialogConsultarControlos;
     private javax.swing.JDialog jDialogConsultarMedidasCorrectivas;
@@ -2121,7 +2269,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelConsultaMedidasCorrectivas;
-    private javax.swing.JLabel jLabelCorrectivaMedidasCorrectivas;
     private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelDataMedidasCorrectivas;
     private javax.swing.JLabel jLabelDataNaoConformidade;
@@ -2138,12 +2285,12 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelResultado;
     private javax.swing.JLabel jLabelTipo;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanelConsultaControlos;
+    private javax.swing.JPanel jPanelConsultaNaoConformidades;
     private javax.swing.JPanel jPanelMedidasCorrectivas;
+    private javax.swing.JPanel jPanelNaoConformidades;
+    private javax.swing.JPanel jPanelNovoControloResultdos;
     private javax.swing.JPanel jPanelOutraOpcao;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneConsultaMedidasCorrectivas;
