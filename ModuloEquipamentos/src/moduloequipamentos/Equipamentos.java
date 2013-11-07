@@ -85,6 +85,8 @@ public class Equipamentos extends javax.swing.JFrame {
         jButtonControloResultados = new javax.swing.JButton();
         jButtonEditarEquipamento = new javax.swing.JButton();
         jButtonConsultaManutencao = new javax.swing.JButton();
+        jTextFieldPesquisaEquipamento = new javax.swing.JTextField();
+        jLabelPesquisarEquipamento = new javax.swing.JLabel();
         jDialogNovaManutencaoEquipamento = new javax.swing.JDialog();
         jPanelManutencaoEquipamento = new javax.swing.JPanel();
         jLabelManutencaoEquipametno = new javax.swing.JLabel();
@@ -271,8 +273,7 @@ public class Equipamentos extends javax.swing.JFrame {
         );
 
         jDialogConsultaEquipamentos.setTitle("CONSULTA EQUIPAMENTOS");
-        jDialogConsultaEquipamentos.setMinimumSize(new java.awt.Dimension(550, 340));
-        jDialogConsultaEquipamentos.setPreferredSize(new java.awt.Dimension(557, 366));
+        jDialogConsultaEquipamentos.setMinimumSize(new java.awt.Dimension(667, 376));
 
         jTableConsultaEquipamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -334,6 +335,14 @@ public class Equipamentos extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldPesquisaEquipamento.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                jTextFieldPesquisaEquipamentoCaretUpdate(evt);
+            }
+        });
+
+        jLabelPesquisarEquipamento.setText("Pesquisar");
+
         javax.swing.GroupLayout jPanelConsultaEquipamentosLayout = new javax.swing.GroupLayout(jPanelConsultaEquipamentos);
         jPanelConsultaEquipamentos.setLayout(jPanelConsultaEquipamentosLayout);
         jPanelConsultaEquipamentosLayout.setHorizontalGroup(
@@ -342,36 +351,46 @@ public class Equipamentos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelConsultaEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelConsultaEquipamentosLayout.createSequentialGroup()
-                        .addComponent(jButtonNovoEquipamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonManutencaoConsultaEquipamentos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSairConsultaEquipamentos))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultaEquipamentosLayout.createSequentialGroup()
-                        .addComponent(jButtonConsultaManutencao)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEditarEquipamento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonControloResultados))
-                    .addComponent(jScrollPaneConsultaEquipamentos))
-                .addGap(41, 41, 41))
+                        .addGroup(jPanelConsultaEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelConsultaEquipamentosLayout.createSequentialGroup()
+                                .addComponent(jButtonNovoEquipamento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonManutencaoConsultaEquipamentos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonEditarEquipamento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonSairConsultaEquipamentos))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultaEquipamentosLayout.createSequentialGroup()
+                                .addComponent(jTextFieldPesquisaEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonConsultaManutencao)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonControloResultados))
+                            .addComponent(jScrollPaneConsultaEquipamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE))
+                        .addGap(41, 41, 41))
+                    .addGroup(jPanelConsultaEquipamentosLayout.createSequentialGroup()
+                        .addComponent(jLabelPesquisarEquipamento)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelConsultaEquipamentosLayout.setVerticalGroup(
             jPanelConsultaEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaEquipamentosLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabelPesquisarEquipamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelConsultaEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonControloResultados)
                     .addComponent(jButtonConsultaManutencao)
-                    .addComponent(jButtonEditarEquipamento))
+                    .addComponent(jTextFieldPesquisaEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneConsultaEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelConsultaEquipamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNovoEquipamento)
                     .addComponent(jButtonSairConsultaEquipamentos)
-                    .addComponent(jButtonManutencaoConsultaEquipamentos))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(jButtonManutencaoConsultaEquipamentos)
+                    .addComponent(jButtonEditarEquipamento))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogConsultaEquipamentosLayout = new javax.swing.GroupLayout(jDialogConsultaEquipamentos.getContentPane());
@@ -388,7 +407,7 @@ public class Equipamentos extends javax.swing.JFrame {
             .addGroup(jDialogConsultaEquipamentosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelConsultaEquipamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jDialogNovaManutencaoEquipamento.setTitle("NOVA MANUTENCAO DE EQUIPAMENTO");
@@ -568,7 +587,7 @@ public class Equipamentos extends javax.swing.JFrame {
         );
 
         jDialogConsultaControloResultadosEquipamento.setTitle("CONSULTA CONTROLO DE RESULTADOS ");
-        jDialogConsultaControloResultadosEquipamento.setMinimumSize(new java.awt.Dimension(922, 294));
+        jDialogConsultaControloResultadosEquipamento.setMinimumSize(new java.awt.Dimension(922, 305));
 
         jTableConsultaControloResultado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -613,12 +632,12 @@ public class Equipamentos extends javax.swing.JFrame {
                 .addGroup(jPanelControloResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneConsultaControloResultados, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
                     .addGroup(jPanelControloResultadosLayout.createSequentialGroup()
-                        .addComponent(jButtonSairControloResultado)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelControloResultadosLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonVerNaoConformidadesEquipamento)))
+                        .addComponent(jButtonVerNaoConformidadesEquipamento))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelControloResultadosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonSairControloResultado)))
                 .addContainerGap())
         );
         jPanelControloResultadosLayout.setVerticalGroup(
@@ -652,7 +671,8 @@ public class Equipamentos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jDialogConsultaNaoConformidades.setMinimumSize(new java.awt.Dimension(965, 313));
+        jDialogConsultaNaoConformidades.setTitle("CONSULTA NÃO CONFORMIDADES");
+        jDialogConsultaNaoConformidades.setMinimumSize(new java.awt.Dimension(965, 318));
 
         jTableNaoConformidadesEquipamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -687,9 +707,9 @@ public class Equipamentos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelNaoConformidadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneNaoConformidades, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
-                    .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
-                        .addComponent(jButtonSairNaoConformidades)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelNaoConformidadesLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonSairNaoConformidades)))
                 .addContainerGap())
         );
         jPanelNaoConformidadesLayout.setVerticalGroup(
@@ -697,9 +717,9 @@ public class Equipamentos extends javax.swing.JFrame {
             .addGroup(jPanelNaoConformidadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPaneNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSairNaoConformidades)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogConsultaNaoConformidadesLayout = new javax.swing.GroupLayout(jDialogConsultaNaoConformidades.getContentPane());
@@ -716,7 +736,7 @@ public class Equipamentos extends javax.swing.JFrame {
             .addGroup(jDialogConsultaNaoConformidadesLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jPanelNaoConformidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -758,7 +778,7 @@ public class Equipamentos extends javax.swing.JFrame {
     private void jButtonAddNovoEquipaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNovoEquipaActionPerformed
         // ADICIONAR NOVO EQUIPAMENTO
         jButtonActualizar.setVisible(false);
-        jButtonActualizar.setVisible(false);
+        jButtonGuardarEquipametno.setVisible(true);
         jDialogNovoEquipamento.setLocationRelativeTo(this);
         jDialogNovoEquipamento.setVisible(true);
     }//GEN-LAST:event_jButtonAddNovoEquipaActionPerformed
@@ -780,6 +800,12 @@ public class Equipamentos extends javax.swing.JFrame {
             InserirNovoEquipamento();
             LimpaCamposNovoEquipamento();
             jDialogNovoEquipamento.setVisible(false);
+            
+            LimpaTabelaConsultaEquipamentos();
+            ConsultaEquipamentos();
+            jDialogConsultaEquipamentos.setLocationRelativeTo(this);
+            jDialogConsultaEquipamentos.setVisible(true);
+            
         }
     }//GEN-LAST:event_jButtonGuardarEquipametnoActionPerformed
 
@@ -798,8 +824,9 @@ public class Equipamentos extends javax.swing.JFrame {
         jDialogConsultaEquipamentos.setVisible(false);
         jDialogNovoEquipamento.setLocationRelativeTo(this);
         jDialogNovoEquipamento.setVisible(true);
+        //BUTOES
         jButtonActualizar.setVisible(false);
-        jButtonAddNovoEquipa.setVisible(true);
+        jButtonGuardarEquipametno.setVisible(true);
     }//GEN-LAST:event_jButtonNovoEquipamentoActionPerformed
 
     private void jButtonSairConsultaEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairConsultaEquipamentosActionPerformed
@@ -841,7 +868,16 @@ public class Equipamentos extends javax.swing.JFrame {
         if (observacao.equals("")){
             JOptionPane.showMessageDialog(jDialogNovaManutencaoEquipamento, "Introduza a Descrição da Manutenção!");
         } else{      
+            
             InserirManuencaoEquipamento();
+            jDialogNovaManutencaoEquipamento.setVisible(false);
+            
+            LimpaTabelaConsultaManutencaoEquipamentos();
+            ConsultaManutencaoEquipamentos();
+            
+            jDialogConsultaManutencaoEquipamentos.setLocationRelativeTo(this);
+            jDialogConsultaManutencaoEquipamentos.setVisible(true);
+            
         }
     }//GEN-LAST:event_jButtonGravarManutencaoEquipametnoActionPerformed
 
@@ -968,8 +1004,6 @@ public class Equipamentos extends javax.swing.JFrame {
                     jDialogConsultaNaoConformidades.setVisible(true);
                 }
 
-
-
             } else {
                 JOptionPane.showMessageDialog(jDialogConsultaControloResultadosEquipamento, "Linha Selecciona não contem Nehuma Não Conformidade ! ");
             }
@@ -1011,6 +1045,13 @@ public class Equipamentos extends javax.swing.JFrame {
             System.out.println("ID EQUIPAMENTO SELEC.: " + idEquipamentoSelecionado);
         }
     }//GEN-LAST:event_jButtonConsultaManutencaoActionPerformed
+
+    private void jTextFieldPesquisaEquipamentoCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaEquipamentoCaretUpdate
+        // TEXTFIEL PESQUISAR EQUIPAMENTO
+       LimpaTabelaConsultaEquipamentos();
+       PesquisarEquipamento();
+        
+    }//GEN-LAST:event_jTextFieldPesquisaEquipamentoCaretUpdate
 
     
    /* **********************************  FUNÇOES ***************************************************** */   
@@ -1075,7 +1116,10 @@ public class Equipamentos extends javax.swing.JFrame {
             con = DriverManager.getConnection(url);
             String nomeTabela = "EQUIPAMENTOS";
             sql = "INSERT INTO " + nomeTabela + "(NOME,DESCRICAO)" + " values(" + "'" + nomeEquipamento + "'" + "," + "'" + observacaoEquipamento + "'" + ")";
-
+            
+            
+            JOptionPane.showMessageDialog(jDialogNovoEquipamento, "Equipamento Gravado Com Sucesso !");
+            
             PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
             st.executeUpdate();
             st.close();
@@ -1144,6 +1188,9 @@ public class Equipamentos extends javax.swing.JFrame {
                 String nomeTabela = "MANUTENCAOEQUIPAMENTOS";
                 sql = "INSERT INTO " + nomeTabela + "(IDEQUIPAMENTO,IDFUNCIONARIO,DATA,OBSERVACOES,FICHATECNICA)" + " values("+ idEquip + "," +idFuncionarioRresponsavel + "," + "'" + data + "'" + "," + "'" + observacoes + "'"+"," + "'" + fichaTecnica+ "'"  + ")";
 
+                
+                JOptionPane.showMessageDialog(jDialogNovaManutencaoEquipamento, "Manutenção Adicionada Com Sucesso !");
+                
                 PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
                 st.executeUpdate();
                 st.close();
@@ -1414,19 +1461,56 @@ public class Equipamentos extends javax.swing.JFrame {
         } 
         
         
-        
-        
-        
-        
-        
-        
-        
-        
+              
         
         
     }
      
-     /*  UPDATE  */
+    
+    /*  PESQUISAR   */
+    private void PesquisarEquipamento(){
+         // DADOS A EPSQUISAR
+        
+        String nome = "";
+        String descricao = "";
+        
+        String pesquisa = jTextFieldPesquisaEquipamento.getText();
+        
+        model = (DefaultTableModel) jTableConsultaEquipamentos.getModel();
+        
+          try{
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+        }catch (ClassNotFoundException e) { //driver não encontrado
+            System.err.print("ClassNotFoundException: ");
+            System.err.println(e.getMessage());
+            System.out.println("O driver expecificado nao foi encontrado."); 
+        }
+          
+          
+        try{
+            con = DriverManager.getConnection(url);
+            String nomeTabela = "EQUIPAMENTOS";
+            sql = "select * from "+ nomeTabela+" where NOME like '"+pesquisa+ "%'";
+            PreparedStatement st = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()){                
+                nome = rs.getString("NOME");
+                descricao = rs.getString("DESCRICAO");
+               
+                //guardar dados num arraylist e adicionalos a tabela
+                model.addRow(new Object[]{nome, descricao});
+            }
+            st.close();
+            con.close();
+        }catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+        
+        
+    }
+    
+    
+    /*  UPDATE  */
      private void UpdateDadosEquipamento(){
          String nome =  jTextFieldNomeEquipamento.getText();
          String descricao =  jTextAreaObservacaoNovoEquipamento.getText();
@@ -1646,6 +1730,7 @@ public class Equipamentos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelManutencaoEquipametno;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelNovoEquipametno;
+    private javax.swing.JLabel jLabelPesquisarEquipamento;
     private javax.swing.JPanel jPanelConsultaEquipamentos;
     private javax.swing.JPanel jPanelConsultaManutencaoEquipamentos;
     private javax.swing.JPanel jPanelControloResultados;
@@ -1666,5 +1751,6 @@ public class Equipamentos extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaObservacaoManutencaoEquipameto;
     private javax.swing.JTextArea jTextAreaObservacaoNovoEquipamento;
     private javax.swing.JTextField jTextFieldNomeEquipamento;
+    private javax.swing.JTextField jTextFieldPesquisaEquipamento;
     // End of variables declaration//GEN-END:variables
 }
